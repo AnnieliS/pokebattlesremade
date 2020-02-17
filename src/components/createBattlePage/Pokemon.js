@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 
-export class Pokemon extends Component {
+export class Pokemon extends Component {    
     render() {
         return (
             <div>
-                <img className="poke" src={this.props.poke.images.icon} alt={this.props.poke.name} onClick = {this.props.choose.bind(this, this.props.poke._id)}></img>
+                <img className="poke"
+                src={this.props.poke.images.icon}
+                alt={this.props.poke.name}
+                onClick = {this.props.choose.bind(this, this.props.poke._id)}></img>
 
                 <style>
                                 {`
