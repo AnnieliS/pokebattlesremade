@@ -36,7 +36,7 @@ export class Handicap extends Component {
                     placeholder = "Item Title..."
                     value = {this.state.title}
                     onChange = {this.changeTitle}
-                    className = "form-control" />
+                    className = "form-control m-1" />
 
                     <input
                     type = "textarea"
@@ -44,7 +44,7 @@ export class Handicap extends Component {
                     placeholder= "Item Body..."
                     value = {this.state.body}
                     onChange = {this.changeBody}
-                    className = "form-control"  />
+                    className = "form-control m-1"  />
 
                     <button
                     type = "submit"

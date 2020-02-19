@@ -11,7 +11,7 @@ export class Header extends Component {
 
     render() {
         return (
-            <div className = "col-3 m-0 align-self-start h-100" style = {{backgroundColor: "#FAFAFA", position: "fixed"}}>
+            <div className = "col-3 m-0 align-self-start h-100" style = {{backgroundColor: "#F8f8f8", position: "fixed"}}>
                 <div className = "row justify-content-center pt-5">
                         <div style = {logoStyle}></div> 
                     </div>

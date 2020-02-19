@@ -52,7 +52,7 @@ export class CreateBattle extends Component {
                 <ChosenList chosen={this.state.chosen} deChoose = {this.deChoose}></ChosenList>
             </div>
             
-            <div className="row d-flex justify-content-center">
+            <div className="row">
                 <AllPokemon pokemons={this.state.pokemons} choose = {this.Choose}></AllPokemon>
             </div>
             </div>
@@ -82,6 +82,12 @@ const arrowStyle = {
     color: "#FFF",
     letterSpacing: "0",
     opacity: "0.7"
+}
+
+
+
+const red = {
+    backgroundColor: "red"
 }
 
 
