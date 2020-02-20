@@ -1,8 +1,14 @@
-import React, { Component } from 'react'
-import {Pokemon} from './Pokemon'
+import React, {Component} from 'react'
+import { Pokemon } from './Pokemon'
+
 
 export class AllPokemon extends Component {
     render() {
+    if (this.props.loading) {
+        return (
+            <div className="pokemonSpinner"></div>
+        )
+    }
         return (
             <div className="container d-flex justify-content-around flex-wrap">
                 {this.props.pokemons.map((poke)=> (

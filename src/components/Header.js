@@ -11,7 +11,7 @@ export class Header extends Component {
 
     render() {
         return (
-            <div className = "col-3 m-0 align-self-start h-100" style = {{backgroundColor: "#F8f8f8", position: "fixed"}}>
+            <div className = "col-2 m-0 align-self-start h-100" style = {{backgroundColor: "#F8f8f8", position: "fixed"}}>
                 <div className = "row justify-content-center pt-5">
                         <div style = {logoStyle}></div> 
                     </div>
@@ -36,6 +36,10 @@ export class Header extends Component {
 
                     <div className = "row justify-content-center" style={liStyle}>
                         <NavLink exact to="/CreateBattle" style={liStyle} activeStyle={this.active}>Create Battle</NavLink>
+                    </div>
+
+                    <div className = "row justify-content-center" style={liStyle}>
+                        <NavLink exact to="/TestBattle" style={liStyle} activeStyle={this.active}>Test Battle</NavLink>
                     </div>
 
                     <div className = "row justify-content-center pt-3">

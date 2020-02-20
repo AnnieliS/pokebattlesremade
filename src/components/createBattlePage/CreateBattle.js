@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import {ChosenList} from './ChosenList'
-import {AllPokemon} from './AllPokemon'
-import {Handicap} from './Handicap'
-import {FaChevronCircleLeft} from 'react-icons/fa'
+import { ChosenList } from './ChosenList'
+import { AllPokemon } from './AllPokemon'
+import { Handicap } from './Handicap'
+import { FaChevronCircleLeft } from 'react-icons/fa'
 import Axios from 'axios';
 
 
@@ -12,24 +12,30 @@ import Axios from 'axios';
 export class CreateBattle extends Component {
     state = {
         pokemons: [],
-        chosen: []
+        chosen: [],
+        loading: false
     }
 
-    componentDidMount(){
-    Axios.get('https://pokebattles12.herokuapp.com/pokemons/read')
-    .then(res => this.setState({pokemons : res.data}))
-    .catch(res => console.log(res));
+    componentWillMount() {
+        this.setState({ loading: true });
+        console.log("will mount");
     }
 
-    Choose = (id) =>{
+    componentDidMount() {
+        Axios.get('https://pokebattles12.herokuapp.com/pokemons/read')
+            .then(res => { this.setState({ pokemons: res.data }); this.setState({ loading: false }); })
+            .catch(res => console.log(res));
+    }
+
+    Choose = (id) => {
         let chosen = this.state.chosen;
         if (chosen.length < 3)
-        chosen.push(this.state.pokemons.filter( poke => poke._id === id));
-        this.setState({chosen})
+            chosen.push(this.state.pokemons.filter(poke => poke._id === id));
+        this.setState({ chosen })
     }
 
     deChoose = (id) => {
-        this.setState({chosen: [...this.state.chosen.filter(poke => poke[0]._id !== id)]})
+        this.setState({ chosen: [...this.state.chosen.filter(poke => poke[0]._id !== id)] })
     }
 
 
@@ -40,21 +46,21 @@ export class CreateBattle extends Component {
                     <div className=" d-flex float-left" style={backBlock}></div>
                 </div>
 
-            <div className="row d-flex justify-content-start ml-5 mt-3">
-            <FaChevronCircleLeft style={arrowStyle} className="my-auto m-3"/><h1 style={titleStyle}>Create New Battle</h1>
-            </div>
+                <div className="row d-flex justify-content-start ml-5 mt-3">
+                    <FaChevronCircleLeft style={arrowStyle} className="my-auto m-3" /><h1 style={titleStyle}>Create New Battle</h1>
+                </div>
 
-            <div className="row d-flex justify-content-center">
-                <Handicap></Handicap>
-            </div>
-            
-            <div className="row d-flex justify-content-center">
-                <ChosenList chosen={this.state.chosen} deChoose = {this.deChoose}></ChosenList>
-            </div>
-            
-            <div className="row">
-                <AllPokemon pokemons={this.state.pokemons} choose = {this.Choose}></AllPokemon>
-            </div>
+                <div className="row d-flex justify-content-center">
+                    <Handicap></Handicap>
+                </div>
+
+                <div className="row d-flex justify-content-center">
+                    <ChosenList chosen={this.state.chosen} deChoose={this.deChoose}></ChosenList>
+                </div>
+
+                <div className="row">
+                    <AllPokemon pokemons={this.state.pokemons} loading={this.state.loading} choose={this.Choose}></AllPokemon>
+                </div>
             </div>
         )
     }
@@ -82,12 +88,6 @@ const arrowStyle = {
     color: "#FFF",
     letterSpacing: "0",
     opacity: "0.7"
-}
-
-
-
-const red = {
-    backgroundColor: "red"
 }
 
 

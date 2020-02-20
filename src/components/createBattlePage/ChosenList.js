@@ -7,34 +7,34 @@ export class ChosenList extends Component {
         let i = this.props.chosen.length;
         let placeHolders = [];
 
-        for(i ; i< 3; i++){
+        for (i; i < 3; i++) {
             placeHolders.push("https://image.flaticon.com/icons/png/128/1068/1068729.png");
         }
 
         return (
             <div className="container d-flex justify-content-around flex-wrap">
-            <span className="row ml-1" style={chosenListStyle}>
-
-                
-            {this.props.chosen.map(chosen => 
-                <div key={chosen[0]._id} className = "col-3 m-auto align-content-around" style={chosenStyle}>
-                    <img style={imgResponse1} src={chosen[0].images.avatar} alt={chosen[0].name} onClick = {this.props.deChoose.bind(this, chosen[0]._id)}></img>
-                   <img style={imgResponse} src={chosen[0].images.front} alt={chosen[0].name} onClick = {this.props.deChoose.bind(this, chosen[0]._id)}></img>
-                </div>
-                )}
-               
-               
-               
-                {placeHolders.map((ph, i) =>
-                    <div key={i} className = "col-3 m-auto align-content-around" style = {notChosenStyle}>
-                    <img className="m-auto d-block" style={imgNotResponse} src={ph} alt={"not Chosen"}></img>
-                    </div>
-                )}
+                <span className="row ml-1" style={chosenListStyle}>
 
 
-            </span>
-            
-        </div>   
+                    {this.props.chosen.map(chosen =>
+                        <div key={chosen[0]._id} className="col-3 m-auto align-content-around" style={chosenStyle}>
+                            <img style={imgResponse1} src={chosen[0].images.avatar} alt={chosen[0].name} onClick={this.props.deChoose.bind(this, chosen[0]._id)}></img>
+                            <img style={imgResponse} src={chosen[0].images.front} alt={chosen[0].name} onClick={this.props.deChoose.bind(this, chosen[0]._id)}></img>
+                        </div>
+                    )}
+
+
+
+                    {placeHolders.map((ph, i) =>
+                        <div key={i} className="col-3 m-auto align-content-around" style={notChosenStyle}>
+                            <img className="m-auto d-block" style={imgNotResponse} src={ph} alt={"not Chosen"}></img>
+                        </div>
+                    )}
+
+
+                </span>
+
+            </div>
         )
     }
 }
@@ -49,7 +49,7 @@ const chosenListStyle = {
 const chosenStyle = {
     height: "233px",
     width: "233px",
-    borderRadius : "10px",
+    borderRadius: "10px",
     backgroundImage: "linear-gradient(rgba(255,0,0,0), rgba(255,0,0,0.4))"
 
 }
@@ -57,7 +57,7 @@ const chosenStyle = {
 const notChosenStyle = {
     height: "233px",
     width: "233px",
-    borderRadius : "10px",
+    borderRadius: "10px",
     borderStyle: "dashed",
     borderWidth: "2px",
     borderColor: "#d8d8d8",

@@ -1,32 +1,32 @@
 import React, { Component } from 'react'
 
-export class Pokemon extends Component {    
+export class Pokemon extends Component {
     render() {
         return (
-            <div className="col-3 m-2 poke" style={pokemonStyle} onClick = {this.props.choose.bind(this, this.props.poke._id)}>
+            <div className="col-3 m-2 poke" style={pokemonStyle} onClick={this.props.choose.bind(this, this.props.poke._id)}>
                 <img
-                src={this.props.poke.images.icon}
-                alt={this.props.poke.name}
+                    src={this.props.poke.images.icon}
+                    alt={this.props.poke.name}
                 ></img>
-                <p style = {pokemonNameStyle}>{this.props.poke.name}</p>
-                <div className = "d-flex justify-content-around mt-1">
-        <p style={typeStyle}>{this.props.poke.type1}</p>
-        <p style={typeStyle}>{this.props.poke.type2}</p>
-        </div>
+                <p style={pokemonNameStyle}>{this.props.poke.name}</p>
+                <div className="d-flex justify-content-around mt-1">
+                    <p style={typeStyle}>{this.props.poke.type1}</p>
+                    <p style={typeStyle}>{this.props.poke.type2}</p>
+                </div>
                 <style>
                     {`
                     .poke:hover{
                         opacity: 0.5;
                     }
                     `}
-                </style>        
+                </style>
             </div>
         )
     }
 }
 
-const pokemonStyle ={
-    borderRadius : "10px",
+const pokemonStyle = {
+    borderRadius: "10px",
     // borderStyle : "dashed",
     // borderWidth: "2px",
     // borderColor: "#d8d8d8",
@@ -56,8 +56,8 @@ const typeStyle = {
     width: "50px",
     height: "18px",
 
-    borderRadius : "7px",
-    borderStyle : "dashed",
+    borderRadius: "7px",
+    borderStyle: "dashed",
     borderWidth: "1px",
     borderColor: "#e8e8e8"
 
