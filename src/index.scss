@@ -65,8 +65,10 @@ body {
 }
 
 .gameboy {
-  float: left;
-  position:relative;
+  position: absolute;;
+  position: fixed;
+  margin: 0;
+  opacity: 0.3;
   width:350px;
   height:570px;
   border-radius:20px;

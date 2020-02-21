@@ -26,7 +26,7 @@ export class Battle extends Component {
                     <img src={this.props.battle.player2[2].img.front} alt={this.props.battle.player2[2].name} style={player2PokemonStyle}></img>
                     </div>
                     <div className="row-12" style= {{width: "100%"}}>
-                    <img src={this.props.battle.player1[this.props.activePokemon].img.back} alt={this.props.battle.player1[0].name} style={player1PokemonStyle}></img>
+                    <img src={this.props.battle.player1[this.props.activePokemon].img.back} alt={this.props.battle.player1[this.props.activePokemon].name} style={player1PokemonStyle}></img>
                     </div>
                     </div>
                 </div>
