@@ -12,12 +12,12 @@ export class Attacks extends Component {
 
                 }
                 {attacks.map((attack, i) =>
-                <div className="col-5 attackHov">
-                    <div key={i} className="row m-0  justify-content-between">
+                <div key={i} className="col-5 m-2 attackHov">
+                    <div  className="row m-0  justify-content-between">
                         <div style={attackName}>{attack.name}</div>
                         <div style={attackType}>{attack.type.name}</div>
                     </div>
-                     <div key={i} className="row m-0 justify-content-between">
+                     <div className="row m-0 justify-content-between">
                      <div style={attackType}>Power: {attack.power}</div>
                      <div style={attackType}>Type: {attack.damage_class.name}</div>
                  </div>

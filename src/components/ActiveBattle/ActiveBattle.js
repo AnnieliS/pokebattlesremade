@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Battle from './Battle';
 import SwitchPoke from './SwitchPoke';
 import Attacks from './Attacks';
+import BattleScreen from './BattleScreen';
 
 
 export class ActiveBattle extends Component {
@@ -45,6 +46,7 @@ switchPokemon = (activePoke) => {
         return (
             <div className="ml-1 flex-wrap">
                 <div className="container d-flex justify-content-center">
+                    <BattleScreen></BattleScreen>
                     <Battle battle={this.state.battle} activePokemon = {this.state.activePokemon}></Battle>
                 </div>
                 <div className="col">

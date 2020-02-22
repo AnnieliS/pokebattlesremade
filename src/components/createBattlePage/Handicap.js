@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {FaDiceD20} from 'react-icons/fa'
+import { FaDiceD20 } from 'react-icons/fa'
 
 export class Handicap extends Component {
     state = {
@@ -7,19 +7,19 @@ export class Handicap extends Component {
         body: ''
     }
 
-    
+
     changeTitle = (e) => {
-        this.setState( {title : e.target.value });
+        this.setState({ title: e.target.value });
     }
 
     changeBody = (e) => {
-        this.setState({ body : e.target.value });
+        this.setState({ body: e.target.value });
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.addListItem(this.state.title , this.state.body);
-        this.setState ({title: '' , body : ''}) ;
+        this.props.addListItem(this.state.title, this.state.body);
+        this.setState({ title: '', body: '' });
     }
 
     render() {
@@ -28,29 +28,29 @@ export class Handicap extends Component {
                 <div className="row mt-5 ml-5">
                     <h2 style={titleStyle}>Choose Battle Settings</h2>
                 </div>
-            
-                <form onSubmit = {this.onSubmit} className = "form-group">
+
+                <form onSubmit={this.onSubmit} className="form-group">
                     <input
-                    type="text"
-                    name = "title"
-                    placeholder = "Item Title..."
-                    value = {this.state.title}
-                    onChange = {this.changeTitle}
-                    className = "form-control m-1" />
+                        type="text"
+                        name="title"
+                        placeholder="Item Title..."
+                        value={this.state.title}
+                        onChange={this.changeTitle}
+                        className="form-control m-1" />
 
                     <input
-                    type = "textarea"
-                    name = "body"
-                    placeholder= "Item Body..."
-                    value = {this.state.body}
-                    onChange = {this.changeBody}
-                    className = "form-control m-1"  />
+                        type="textarea"
+                        name="body"
+                        placeholder="Item Body..."
+                        value={this.state.body}
+                        onChange={this.changeBody}
+                        className="form-control m-1" />
 
                     <button
-                    type = "submit"
-                    style = {submitStyle}>
-                    <FaDiceD20 style={diceStyle} />
-                        </button>
+                        type="submit"
+                        style={submitStyle}>
+                        <FaDiceD20 style={diceStyle} />
+                    </button>
                 </form>
             </div>
         )
@@ -79,7 +79,7 @@ const submitStyle = {
     position: 'relative',
     marginLeft: '42.54%',
 
-    
+
 }
 
 const diceStyle = {

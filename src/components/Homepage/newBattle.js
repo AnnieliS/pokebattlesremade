@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {FaCompactDisc} from 'react-icons/fa'
+
 
 export class newBattle extends Component {
     render() {
