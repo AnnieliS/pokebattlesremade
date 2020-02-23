@@ -4,7 +4,8 @@ import {Homepage} from '../components/Homepage/Homepage'
 import CreateBattle from '../components/createBattlePage/CreateBattle'
 import {Header} from '../components/Header'
 import ActiveBattle from '../components/ActiveBattle/ActiveBattle'
-import Discover from '../components/MusicSugg/Discover';
+import Discover from '../components/MusicSugg/Discover'
+import JoinBattle from '../components/JoinBattle/JoinBattle'
 
 
 const ReactRouter = () => {
@@ -12,14 +13,15 @@ const ReactRouter = () => {
 return (
     <React.Fragment>
         <div className="flexContainer justify-content-between container-fluid no-gutters pl-0">
-        <div className="col-md-2">
+        <div className="col-sm-2 hideWhenSmall">
         <Header></Header>
         </div>
-        <div className="col-10 justify-content-center ">
+        <div className="col-10 justify-content-center" style={{overflowX: "hidden"}}>
             <Route exact path="/" component={Homepage} />
             <Route path="/CreateBattle" component={CreateBattle} />
             <Route path="/TestBattle" component={ActiveBattle} />
             <Route path="/MusicChooser" component={Discover} />
+            <Route path="/JoinBattle" component={JoinBattle} />
             </div>
         </div>
 

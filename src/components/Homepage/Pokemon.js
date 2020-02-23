@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 export class Pokemon extends Component {
     render() {
-        console.log(this.props.poke.img.front);
         return (
             <div className="mt-2">
                  <img src={this.props.poke.img.front} alt={this.props.poke.name}></img>

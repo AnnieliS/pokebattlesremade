@@ -2,21 +2,17 @@ import React, { Component } from 'react'
 import { ChosenList } from './ChosenList'
 import { AllPokemon } from './AllPokemon'
 import { Handicap } from './Handicap'
-import { FaChevronCircleLeft } from 'react-icons/fa'
+import { FaChevronCircleLeft} from 'react-icons/fa'
 import Axios from 'axios';
 import { NavLink, Redirect } from 'react-router-dom'
 
-
-
-
-
-export class CreateBattle extends Component {
+export class JoinBattle extends Component {
     state = {
         pokemons: [],
         chosen: [],
         loading: false,
-        player: 0,
-        backToHome: false
+        id: 0,
+        finish: false
     }
 
     componentWillMount() {
@@ -27,12 +23,15 @@ export class CreateBattle extends Component {
         Axios.get('https://pokebattles12.herokuapp.com/pokemons/read')
             .then(res => { this.setState({ pokemons: res.data }); this.setState({ loading: false }); })
             .catch(res => console.log(res));
+        this.setState({id: this.props.location.state.battleId})
     }
 
     Choose = (id) => {
         let chosen = this.state.chosen;
-        if (chosen.length < 3)
+        if (chosen.length < 3){
             chosen.push(this.state.pokemons.filter(poke => poke._id === id));
+            chosen.filter((poke, i) => {return chosen.indexOf(poke) === i})
+            }
         this.setState({ chosen })
     }
 
@@ -42,16 +41,16 @@ export class CreateBattle extends Component {
 
 
     onSubmit = (pokemons) => {
-        console.log("enter");
-        Axios.post('https://pokebattles12.herokuapp.com/battle/create', {player1: pokemons})
-        .then(this.setState({backToHome: true}))
+        Axios.put(`https://pokebattles12.herokuapp.com/battle/updatePlayer/${this.state.id}`, {player2: pokemons})
+        .then(() => {this.setState({finish: true})})
+        .catch(err => console.log(err))
     }
 
 
 
     render() {
-    if(this.state.backToHome)
-    return(<Redirect exact to='/'></Redirect>)
+        if(this.state.finish)
+        return <Redirect exact to="/"></Redirect>
         return (
             <div className="container ml-1">
                 <div className="row">
@@ -104,4 +103,5 @@ const arrowStyle = {
 }
 
 
-export default CreateBattle
+
+export default JoinBattle

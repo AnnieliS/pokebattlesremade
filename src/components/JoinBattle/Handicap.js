@@ -84,7 +84,14 @@ export class Handicap extends Component {
                         defense: poke.stats.defense,
                         spAttack: poke.stats.sp_attack,
                         spDefense: poke.stats.sp_defense
+                    },
+                    attacks: {
+                        attack1: "",
+                        attack2: "",
+                        attack3: "",
+                        attack4: ""
                     }
+
             }
         )})
         return pokemon;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 
 
 export class NewBattle extends Component {
@@ -14,7 +15,7 @@ export class NewBattle extends Component {
                     <div style={idStyle}>Create New Battle</div>
                 </div>
                 <div className="row m-0">
-                    <div style={joinStyle} onClick={this.props.createBattle.bind(this)}>NEW</div>
+                 <NavLink exact to='/CreateBattle'><div style={joinStyle}>NEW</div></NavLink>
 
                 </div>
                 <div style={line} ></div>

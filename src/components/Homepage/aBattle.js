@@ -5,24 +5,33 @@ export class ABattle extends Component {
 
 
     render() {
+       const joinButton = Object.entries(this.props.battle.player2[0].name).length === 0;
+       let button;
+       
+        if (joinButton)
+            button = <div style={joinStyle} onClick={this.props.joinBattle.bind(this, this.props.battle._id)}>JOIN</div>
+
+        else
+            button = <div style={doneStyle}>DONE</div>
+
         return (
-            <div style={battleStyle} className="container m-5 d-flex justify-content-center flex-wrap">
+            <div style={battleStyle} className="container m-5 d-flex justify-content-center flex-wrap centerWhenSmall">
                 <div className="row m-0 ">
-                <div style={titleStyle}>Battle</div>
+                    <div style={titleStyle}>Battle</div>
                 </div>
                 <div className="row m-0">
-                <div style={idStyle}>{this.props.battle._id}</div>
+                    <div style={idStyle}>{this.props.battle._id}</div>
                 </div>
                 <div className="row m-0">
-                <div style={joinStyle} onClick={this.props.joinBattle.bind(this, this.props._id)}>JOIN</div>
-                
+                   {button}
+
                 </div>
                 <div style={line} ></div>
                 <div className="d-flex m-auto justify-content-between align-items-end">
-                {this.props.battle.player1.map((poke, i) => (
-                    <Pokemon key={i} poke={poke}></Pokemon>
+                    {this.props.battle.player1.map((poke, i) => (
+                        <Pokemon key={i} poke={poke}></Pokemon>
 
-                ))}
+                    ))}
                 </div>
             </div>
         )
@@ -53,7 +62,7 @@ const titleStyle = {
 }
 
 const joinStyle = {
-    backgroundColor : "#FE5266",
+    backgroundColor: "#FE5266",
     width: "80px",
     height: "25px",
     textAlign: "center",
@@ -61,16 +70,28 @@ const joinStyle = {
     borderRadius: "10px",
     color: "#fff",
     fontWeight: "bold",
-   
+
 }
 
-const line ={
+const doneStyle = {
+    backgroundColor: "#5c5c5c",
+    width: "80px",
+    height: "25px",
+    textAlign: "center",
+    fontFamily: "Montserrat",
+    borderRadius: "10px",
+    color: "#fff",
+    fontWeight: "bold",
+
+}
+
+const line = {
     float: "left",
     width: "241px",
     height: "1px",
     backgroundColor: "#B8B8B8",
     position: "absolute",
-    marginTop:"158px",
+    marginTop: "158px",
     marginRight: "131px",
 }
 

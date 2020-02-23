@@ -54,6 +54,16 @@ body {
 
 }
 
+@media (max-width: 575.98px) { 
+  .hideWhenSmall{
+    display: none;
+  }
+
+  .centerWhenSmall{
+    margin: 0 auto;
+  }
+ }
+
 /* Spin Animation */
 @keyframes spin {
   from {
