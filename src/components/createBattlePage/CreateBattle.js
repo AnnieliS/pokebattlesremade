@@ -18,7 +18,6 @@ export class CreateBattle extends Component {
 
     componentWillMount() {
         this.setState({ loading: true });
-        console.log("will mount");
     }
 
     componentDidMount() {
