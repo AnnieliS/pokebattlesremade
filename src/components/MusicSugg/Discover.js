@@ -16,6 +16,7 @@ export class Discover extends Component {
         Axios.get('https://pokebattles12.herokuapp.com/pokemons/read')
             .then(res => { this.setState({ allPoke: res.data }); })
             .catch(res => console.log(res));
+
     }
 
     Choose = (id) => {
@@ -95,8 +96,13 @@ export class Discover extends Component {
         });
         const setArr = new Set(songsArr);
         const backToArr = [...setArr];
-        // console.log(backToArr);
-        this.setState({allSongs: backToArr});
+        this.setState({allSongs : []})
+
+        backToArr.forEach(id => {
+            Axios.get(`https://api.deezer.com/track/${id}`)
+            .then(res=> {this.setState({allSongs: [...this.state.allSongs, res.data] });})
+            .catch(res => console.log(res));
+        })
         
         
     }
@@ -104,12 +110,12 @@ export class Discover extends Component {
 
 
     render() {
-        // console.log(this.state.allSongs)
+        console.log(this.state.allSongs)
         return (
             <div className = "container">
                 <FavPoke pokemons={this.state.allPoke} chosen={this.state.chosen} choose={this.Choose} deChoose={this.deChoose} chooseToggle={this.chooseToggle} isChoose={this.state.isChoose}></FavPoke>
                 <div style={titleStyle}>Suggested Music</div>
-                <SuggMusic chosenPoke={this.state.chosen} allSongs={this.state.allSongs}></SuggMusic>
+                <SuggMusic allSongs={this.state.allSongs} ></SuggMusic>
                 
             </div>
         )
