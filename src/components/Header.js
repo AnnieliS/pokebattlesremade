@@ -80,6 +80,11 @@ export class Header extends Component {
                 <div className="row justify-content-center" style={liStyle}>
                     <NavLink exact to="/MusicChooser" style={liStyle} activeStyle={this.active}>Discover Music</NavLink>
                 </div>
+
+                <div className="row justify-content-center" style={liStyle}>
+                    <NavLink exact to="/CreatePokemon" style={liStyle} activeStyle={this.active}>CreatePokemon</NavLink>
+                </div>
+
                 <div className="row justify-content-center" style={liStyle}>
                     <Link  to={{pathname: "/JoinBattle", joinBattleProps: this.state.idToJoin}} className="d-none" ></Link>
                 </div>

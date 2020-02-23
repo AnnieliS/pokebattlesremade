@@ -6,6 +6,7 @@ import {Header} from '../components/Header'
 import ActiveBattle from '../components/ActiveBattle/ActiveBattle'
 import Discover from '../components/MusicSugg/Discover'
 import JoinBattle from '../components/JoinBattle/JoinBattle'
+import CreatePokemon from '../components/CreatePokemon/CreatePokemon';
 
 
 const ReactRouter = () => {
@@ -22,6 +23,10 @@ return (
             <Route path="/TestBattle" component={ActiveBattle} />
             <Route path="/MusicChooser" component={Discover} />
             <Route path="/JoinBattle" component={JoinBattle} />
+            <Route path="/CreatePokemon" component={CreatePokemon} />
+
+
+            
             </div>
         </div>
 

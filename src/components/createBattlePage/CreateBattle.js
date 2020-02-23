@@ -16,7 +16,8 @@ export class CreateBattle extends Component {
         chosen: [],
         loading: false,
         player: 0,
-        backToHome: false
+        backToHome: false,
+        handi: "All"
     }
 
     componentWillMount() {
@@ -47,9 +48,15 @@ export class CreateBattle extends Component {
         .then(this.setState({backToHome: true}))
     }
 
+    setHandi = (handi) => {
+        console.log(handi)
+        this.setState({ handi});
+    }
+
 
 
     render() {
+        console.log(this.state.handi);
     if(this.state.backToHome)
     return(<Redirect exact to='/'></Redirect>)
         return (
@@ -63,7 +70,7 @@ export class CreateBattle extends Component {
                 </div>
 
                 <div className="row d-flex justify-content-center">
-                    <Handicap chosen={this.state.chosen} onSubmit={this.onSubmit}></Handicap>
+                    <Handicap chosen={this.state.chosen} onSubmit={this.onSubmit} handi={this.state.handi} setHandi={this.setHandi}></Handicap>
                 </div>
 
                 <div className="row d-flex justify-content-center">
@@ -71,7 +78,7 @@ export class CreateBattle extends Component {
                 </div>
 
                 <div className="row">
-                    <AllPokemon pokemons={this.state.pokemons} loading={this.state.loading} choose={this.Choose}></AllPokemon>
+                    <AllPokemon pokemons={this.state.pokemons} loading={this.state.loading} choose={this.Choose} handi={this.state.handi}></AllPokemon>
                 </div>
             </div>
         )
