@@ -21,7 +21,7 @@ export class ActiveBattle extends Component {
 
     componentDidMount() {
         const battID = "5e521d854ea2300017680221";
-        Axios.get(`https://pokebattles12.herokuapp.com/battle/read/${battID}`)
+        Axios.get(`https://pokebattles12.herokuapp.com/battle/${battID}`)
             .then(res => { this.setState({ battle: res.data, waiting: false }) })
             .catch(res => console.log(res));
 
@@ -64,8 +64,8 @@ export class ActiveBattle extends Component {
         else    
             accuracy = 0;
 
-        console.log("accuracy: " + accuracy);
-        console.log("   damage: " + damage);
+        const dataToSend = [accuracy, damage];
+        return dataToSend
 
     }
 

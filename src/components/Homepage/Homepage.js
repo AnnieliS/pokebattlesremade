@@ -19,7 +19,7 @@ export class Homepage extends Component {
     }
     
     componentDidMount(){
-        Axios.get("https://pokebattles12.herokuapp.com/battles/read")
+        Axios.get("https://pokebattles12.herokuapp.com/battle")
         .then(res => {this.setState({allBattles : res.data.sort((a, b) => a.player2[0].name.length - b.player2[0].name.length)}); this.setState({loading: true})})
         .catch(res => console.log(res));
     }

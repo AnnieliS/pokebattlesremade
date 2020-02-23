@@ -13,7 +13,7 @@ export class Discover extends Component {
     }
     
     componentDidMount() {
-        Axios.get('https://pokebattles12.herokuapp.com/pokemons/read')
+        Axios.get('https://pokebattles12.herokuapp.com/pokemon')
             .then(res => { this.setState({ allPoke: res.data }); })
             .catch(res => console.log(res));
 

@@ -1,18 +1,11 @@
 import React, { Component } from 'react'
-import { NavLink , Link} from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
+import GoogleLogin from 'react-google-login'
 // import Axios from 'axios'
 
-export class Header extends Component {
-    // state = {
-    //     allBattles: [],
-    //     search: ''
-    // }
 
-    // componentDidMount() {
-    //     Axios.get("https://pokebattles12.herokuapp.com/battles/read")
-    //         .then(res => { this.setState({ allBattles: res.data }) })
-    //         .catch(res => console.log(res));
-    // }
+export class Header extends Component {
+
 
     state = {
         idToJoin: ''
@@ -24,6 +17,7 @@ export class Header extends Component {
         fontSize: "14px",
         letterSpacing: "0.5px"
     }
+    
 
     render() {
         return (
@@ -81,19 +75,31 @@ export class Header extends Component {
                     <NavLink exact to="/MusicChooser" style={liStyle} activeStyle={this.active}>Discover Music</NavLink>
                 </div>
 
-                <div className="row justify-content-center" style={liStyle}>
+                {/* <div className="row justify-content-center" style={liStyle}>
                     <NavLink exact to="/CreatePokemon" style={liStyle} activeStyle={this.active}>CreatePokemon</NavLink>
-                </div>
+                </div> */}
 
                 <div className="row justify-content-center" style={liStyle}>
-                    <Link  to={{pathname: "/JoinBattle", joinBattleProps: this.state.idToJoin}} className="d-none" ></Link>
+                    <Link to={{ pathname: "/JoinBattle", joinBattleProps: this.state.idToJoin }} className="d-none" ></Link>
                 </div>
 
+                <div className="row d-flex justify-content-center mt-5" style={liStyle}>
+                    <GoogleLogin
+                        clientId="29392838695-pk7dhdbvdogvp8eatmf478mm9g3evun7.apps.googleusercontent.com"
+                        buttonText="Login"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+                    />
+                </div>
             </div>
         )
     }
 }
 
+const responseGoogle = (response) => {
+    console.log(response);
+  }
 
 const liStyle = {
     color: "#B8B8B8",
@@ -102,6 +108,7 @@ const liStyle = {
     letterSpacing: "0.5px",
     textDecoration: "none"
 }
+
 
 
 const titleStyle = {

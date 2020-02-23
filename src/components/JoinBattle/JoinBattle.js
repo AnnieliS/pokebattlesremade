@@ -20,7 +20,7 @@ export class JoinBattle extends Component {
     }
 
     componentDidMount() {
-        Axios.get('https://pokebattles12.herokuapp.com/pokemons/read')
+        Axios.get('https://pokebattles12.herokuapp.com/pokemon/')
             .then(res => { this.setState({ pokemons: res.data }); this.setState({ loading: false }); })
             .catch(res => console.log(res));
         this.setState({id: this.props.location.state.battleId})
@@ -41,7 +41,7 @@ export class JoinBattle extends Component {
 
 
     onSubmit = (pokemons) => {
-        Axios.put(`https://pokebattles12.herokuapp.com/battle/updatePlayer/${this.state.id}`, {player2: pokemons})
+        Axios.put(`https://pokebattles12.herokuapp.com/battle/${this.state.id}`, {player2: pokemons})
         .then(() => {this.setState({finish: true})})
         .catch(err => console.log(err))
     }

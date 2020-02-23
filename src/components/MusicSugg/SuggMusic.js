@@ -12,13 +12,6 @@ export class SuggMusic extends Component {
     }
 }
 
-componentDidMount(){
-       
-        // Axios.get("https://cors-anywhere.herokuapp.com/https://api.deezer.com/track/3135556")
-        // .then(res=>this.setState({songs: res.data}))
-    }
-
-
     render() {
         console.log(this.props.allSongs);
     

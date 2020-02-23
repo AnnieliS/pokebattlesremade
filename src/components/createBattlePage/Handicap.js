@@ -83,10 +83,10 @@ state = {
             poke = poke[0];
             console.log(poke.images.icon);
             pokemon.push({
-                id: poke.pokedex_number,
+                pokedex_number: poke.pokedex_number,
                 name: poke.name,
                 type1: poke.type1,
-                type2: poke.type2,
+                type2: poke.type2 || "",
                 weakness: poke.weaknesses,
                 img: {
                     default: poke.images.icon,
@@ -100,8 +100,8 @@ state = {
                 stats: {
                     attack: poke.stats.attack,
                     defense: poke.stats.defense,
-                    spAttack: poke.stats.sp_attack,
-                    spDefense: poke.stats.sp_defense
+                    sp_attack: poke.stats.sp_attack,
+                    sp_defense: poke.stats.sp_defense
                 }
             }
             )

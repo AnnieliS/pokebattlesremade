@@ -25,7 +25,7 @@ export class CreateBattle extends Component {
     }
 
     componentDidMount() {
-        Axios.get('https://pokebattles12.herokuapp.com/pokemons/read')
+        Axios.get('https://pokebattles12.herokuapp.com/pokemon/')
             .then(res => { this.setState({ pokemons: res.data }); this.setState({ loading: false }); })
             .catch(res => console.log(res));
     }
@@ -44,7 +44,7 @@ export class CreateBattle extends Component {
 
     onSubmit = (pokemons) => {
         console.log("enter");
-        Axios.post('https://pokebattles12.herokuapp.com/battle/create', {player1: pokemons})
+        Axios.post('https://pokebattles12.herokuapp.com/battle/', {player1: pokemons , handicap: this.state.handi})
         .then(this.setState({backToHome: true}))
     }
 
