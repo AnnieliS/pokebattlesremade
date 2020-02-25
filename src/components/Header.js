@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { NavLink, Link } from 'react-router-dom'
-import GoogleLogin from 'react-google-login'
+import { NavLink, Link, Redirect } from 'react-router-dom'
+import Axios from 'axios'
 // import Axios from 'axios'
 
 
@@ -16,6 +16,11 @@ export class Header extends Component {
         fontFamily: "Montserrat",
         fontSize: "14px",
         letterSpacing: "0.5px"
+    }
+
+    clickLogin = () => {
+        Axios.get("https://pokebattles12.herokuapp.com/login/")
+        .then(<Redirect></Redirect>)
     }
     
 
@@ -84,22 +89,16 @@ export class Header extends Component {
                 </div>
 
                 <div className="row d-flex justify-content-center mt-5" style={liStyle}>
-                    <GoogleLogin
-                        clientId="29392838695-pk7dhdbvdogvp8eatmf478mm9g3evun7.apps.googleusercontent.com"
-                        buttonText="Login"
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
-                        cookiePolicy={'single_host_origin'}
-                    />
+
+                <button
+                onclick={this.clickLogin}>
+                </button>
                 </div>
             </div>
         )
     }
 }
 
-const responseGoogle = (response) => {
-    console.log(response);
-  }
 
 const liStyle = {
     color: "#B8B8B8",

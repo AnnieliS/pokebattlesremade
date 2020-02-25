@@ -35,11 +35,7 @@ export class ActiveBattle extends Component {
                 .then(res => this.setState({ attacks: [...this.state.attacks, res.data] }))
         }
 
-        // TEST ATTACKS
-   
 
-      //  const player = `this.battle.${this.state.player}[${activeHero}]`;
-        
 
     }
 
@@ -101,41 +97,7 @@ export class ActiveBattle extends Component {
 
     }
 
-    // calculateAttack = (attack, type, attClass, accu) => {
-        
-    //     let hero;
-    //     if (this.state.hero === "player1")
-    //          hero = this.state.battle.player1;
-    //     else
-    //         hero = this.state.battle.player2;
-
-    //     let enemy
-    //     if (this.state.enemy === "player1")
-    //         enemy = this.state.battle.player1;
-    //     else
-    //         enemy = this.state.battle.player2;
-        
-    //     const damageMulti = enemy[this.state.activeEnemy].weakness[type];
-    //     let damage = attack * damageMulti;
-    //     if(attClass === "physical"){
-    //         damage = Math.ceil(damage / enemy[this.state.activeEnemy].stats.defense * hero[this.state.activeHero].stats.attack) 
-    //     }
-    //     else if(attClass === "special"){
-    //         damage = Math.ciel(damage / enemy[this.state.activeEnemy].stats.spDefense * hero[this.state.activeHero].stats.spAttack) 
-    //     }
-    //     const randNum = Math.floor(Math.random() * Math.floor(100));
-    //     let accuracy;
-    //     if(randNum <= accu)
-    //         accuracy = 1;
-    //     else    
-    //         accuracy = 0;
-
-    //         console.log(damage);
-    //     const dataToSend = [accuracy, damage];
-    //     return dataToSend;
-
-    // }
-
+  
     renderWaitForPlayer(){
         return(
             <div className = "ml-1 flex-wrap">

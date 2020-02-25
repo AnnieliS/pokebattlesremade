@@ -8,13 +8,14 @@ export class Discover extends Component {
         chosen: [],
         isChoose: false,
         allPoke: [],
-        allSongs: []
+        allSongs: [],
+        loading: true
 
     }
     
     componentDidMount() {
         Axios.get('https://pokebattles12.herokuapp.com/pokemon')
-            .then(res => { this.setState({ allPoke: res.data }); })
+            .then(res => { this.setState({ allPoke: res.data , loading: false});})
             .catch(res => console.log(res));
 
     }
@@ -112,8 +113,9 @@ export class Discover extends Component {
     render() {
         console.log(this.state.allSongs)
         return (
-            <div className = "container">
-                <FavPoke pokemons={this.state.allPoke} chosen={this.state.chosen} choose={this.Choose} deChoose={this.deChoose} chooseToggle={this.chooseToggle} isChoose={this.state.isChoose}></FavPoke>
+            <div className = "container m-4">
+                <div style={titleStyle}>Favorite Pokémon</div>
+                <FavPoke pokemons={this.state.allPoke} loading={this.state.loading} chosen={this.state.chosen} choose={this.Choose} deChoose={this.deChoose} chooseToggle={this.chooseToggle} isChoose={this.state.isChoose}></FavPoke>
                 <div style={titleStyle}>Suggested Music</div>
                 <SuggMusic allSongs={this.state.allSongs} ></SuggMusic>
                 
