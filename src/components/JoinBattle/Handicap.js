@@ -2,24 +2,10 @@ import React, { Component } from 'react'
 import { FaDiceD20 } from 'react-icons/fa'
 
 export class Handicap extends Component {
-    state = {
-        title: '',
-        body: ''
-    }
-
-
-    changeTitle = (e) => {
-        this.setState({ title: e.target.value });
-    }
-
-    changeBody = (e) => {
-        this.setState({ body: e.target.value });
-    }
 
     onSubmit = (e) => {
         e.preventDefault();
         const pokemons = this.makePlayerObj();
-        console.log(pokemons);
         this.props.onSubmit(pokemons);
     }
 
@@ -31,24 +17,15 @@ export class Handicap extends Component {
                 </div>
 
                 <form onSubmit={this.onSubmit} className="form-group">
-                    <input
+                    <label style={labelStyle}>Battle of </label>
+                    <select
                         type="text"
-                        name="title"
-                        placeholder="Item Title..."
-                        value={this.state.title}
-                        onChange={this.changeTitle}
+                        name="handi"
                         className="form-control m-1"
-                        disabled />
-
-                    <input
-                        type="textarea"
-                        name="body"
-                        placeholder="Item Body..."
-                        value={this.state.body}
-                        onChange={this.changeBody}
-                        className="form-control m-1"
-                        disabled />
-
+                        disabled
+                    >
+                        <option value="all">{this.props.handi}-ers</option>
+                    </select>
                     <button
                         type="submit"
                         style={submitStyle}>
@@ -63,37 +40,30 @@ export class Handicap extends Component {
         let pokemon = [];
         this.props.chosen.forEach(poke => {
             poke = poke[0];
-            console.log(poke.images.icon);
             pokemon.push({
-                    id: poke.pokedex_number,
-                    name: poke.name,
-                    type1: poke.type1,
-                    type2: poke.type2,
-                    weakness: poke.weaknesses,
-                    img: {
-                        default: poke.images.icon,
-                        front: poke.images.front,
-                        back: poke.images.back
-                    },
-                    hp: {
-                        current: poke.stats.hp,
-                        total: poke.stats.hp
-                    },
-                    stats: {
-                        attack: poke.stats.attack,
-                        defense: poke.stats.defense,
-                        spAttack: poke.stats.sp_attack,
-                        spDefense: poke.stats.sp_defense
-                    },
-                    attacks: {
-                        attack1: "",
-                        attack2: "",
-                        attack3: "",
-                        attack4: ""
-                    }
-
+                pokedex_number: poke.pokedex_number,
+                name: poke.name,
+                type1: poke.type1,
+                type2: poke.type2 || "",
+                weakness: poke.weaknesses,
+                img: {
+                    default: poke.images.icon,
+                    front: poke.images.front,
+                    back: poke.images.back
+                },
+                hp: {
+                    current: poke.stats.hp,
+                    total: poke.stats.hp
+                },
+                stats: {
+                    attack: poke.stats.attack,
+                    defense: poke.stats.defense,
+                    sp_attack: poke.stats.sp_attack,
+                    sp_defense: poke.stats.sp_defense
+                }
             }
-        )})
+            )
+        })
         return pokemon;
 
     }
@@ -108,11 +78,17 @@ const handiStyle = {
 
 const titleStyle = {
     fontFamily: "Montserrat",
-    fontSize: "28px",
+    fontSize: "18px",
     color: "#000",
     letterSpacing: "0"
 }
 
+const labelStyle = {
+    fontFamily: "Montserrat",
+    fontSize: "38px",
+    color: "#FE5266",
+    letterSpacing: "0.5px"
+}
 
 const submitStyle = {
     border: '0',

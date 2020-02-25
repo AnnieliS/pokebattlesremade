@@ -9,7 +9,7 @@ export class ABattle extends Component {
        let button;
        
         if (joinButton)
-            button = <div style={joinStyle} onClick={this.props.joinBattle.bind(this, this.props.battle._id)}>JOIN</div>
+            button = <div style={joinStyle} onClick={this.props.joinBattle.bind(this, this.props.battle._id, this.props.battle.handicap)}>JOIN</div>
 
         else
             button = <div style={doneStyle}>DONE</div>

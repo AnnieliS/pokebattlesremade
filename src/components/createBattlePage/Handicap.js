@@ -3,19 +3,25 @@ import { FaDiceD20 } from 'react-icons/fa'
 
 export class Handicap extends Component {
 state = {
-    handi: this.props.handi
+    handi: 'All'
 }
 
     changeHandi = (e) => {
+        
         this.setState({handi : e.target.value})
-        this.props.setHandi(this.state.handi);
+        //console.log(this.state.handi);
+        this.props.setHandi(e.target.value);
+       
     }
+
+    // componentDidUpdate(){
+    //     this.props.setHandi(this.state.handi);
+    // }
 
 
     onSubmit = (e) => {
         e.preventDefault();
         const pokemons = this.makePlayerObj();
-        console.log(pokemons);
         this.props.onSubmit(pokemons);
     }
 
@@ -58,13 +64,18 @@ state = {
                         <option value="steel">steel</option>
                         <option value="water">water</option>
                         </optgroup>
+                        <optgroup label="Generation">
+                        <option value="1">Gen 1</option>
+                        <option value="2">Gen 2</option>
+                        <option value="3">Gen 3</option>
+                        <option value="4">Gen 4</option>
+                        <option value="5">Gen 5</option>
+                        </optgroup>
                         <optgroup label="misc">
-                        <option value="small">small</option>
-                        <option value="big">big</option>
-                        <option value="heavy">heavyweight</option>
-                        <option value="light">lightweight</option>
-                        <option value="leg">legendaries</option>
-                        <option value="nonLeg">non legendaries</option>
+                        <option value="small">small bois</option>
+                        <option value="big">big bois</option>
+                        <option value="heavy">heavy bois</option>
+                        <option value="light">light bois</option>
                         </optgroup>
                     </select>
                     <button
@@ -81,7 +92,6 @@ state = {
         let pokemon = [];
         this.props.chosen.forEach(poke => {
             poke = poke[0];
-            console.log(poke.images.icon);
             pokemon.push({
                 pokedex_number: poke.pokedex_number,
                 name: poke.name,

@@ -50,7 +50,7 @@ export class CreateBattle extends Component {
 
     setHandi = (handi) => {
         console.log(handi)
-        this.setState({ handi});
+        this.setState({handi});
     }
 
 

@@ -13,8 +13,6 @@ export class SuggMusic extends Component {
 }
 
     render() {
-        console.log(this.props.allSongs);
-    
         return (
             <div>
                 {

@@ -99,7 +99,7 @@ export class Discover extends Component {
         this.setState({allSongs : []})
 
         backToArr.forEach(id => {
-            Axios.get(`https://api.deezer.com/track/${id}`)
+            Axios.get(`https://cors-anywhere.herokuapp.com/https://api.deezer.com/track/${id}`)
             .then(res=> {this.setState({allSongs: [...this.state.allSongs, res.data] });})
             .catch(res => console.log(res));
         })

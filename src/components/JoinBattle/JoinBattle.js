@@ -12,6 +12,7 @@ export class JoinBattle extends Component {
         chosen: [],
         loading: false,
         id: 0,
+        handi: 'All',
         finish: false
     }
 
@@ -23,7 +24,8 @@ export class JoinBattle extends Component {
         Axios.get('https://pokebattles12.herokuapp.com/pokemon/')
             .then(res => { this.setState({ pokemons: res.data }); this.setState({ loading: false }); })
             .catch(res => console.log(res));
-        this.setState({id: this.props.location.state.battleId})
+        this.setState({id: this.props.location.state.battleId, handi: this.props.location.state.handicap}
+            )
     }
 
     Choose = (id) => {
@@ -58,11 +60,11 @@ export class JoinBattle extends Component {
                 </div>
 
                 <div className="row d-flex justify-content-start ml-5 mt-3">
-                <NavLink exact to="/"><FaChevronCircleLeft style={arrowStyle} className="my-auto m-3" onClick={this.backButton} /></NavLink> <h1 style={titleStyle}>Create New Battle</h1>
+                <NavLink exact to="/"><FaChevronCircleLeft style={arrowStyle} className="my-auto m-3" onClick={this.backButton} /></NavLink> <h1 style={titleStyle}>Join Battle</h1>
                 </div>
 
                 <div className="row d-flex justify-content-center">
-                    <Handicap chosen={this.state.chosen} onSubmit={this.onSubmit}></Handicap>
+                    <Handicap chosen={this.state.chosen} onSubmit={this.onSubmit} handi={this.state.handi}></Handicap>
                 </div>
 
                 <div className="row d-flex justify-content-center">
@@ -70,7 +72,7 @@ export class JoinBattle extends Component {
                 </div>
 
                 <div className="row">
-                    <AllPokemon pokemons={this.state.pokemons} loading={this.state.loading} choose={this.Choose}></AllPokemon>
+                    <AllPokemon pokemons={this.state.pokemons} loading={this.state.loading} choose={this.Choose} handi={this.state.handi}></AllPokemon>
                 </div>
             </div>
         )

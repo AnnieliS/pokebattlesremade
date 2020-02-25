@@ -11,7 +11,8 @@ export class Homepage extends Component {
         allBattles : [],
         loading: false,
         redirect: false,
-        chosenID: 0
+        chosenID: 0,
+        handicap: 'All'
     }
 
     componentWillMount(){
@@ -24,8 +25,9 @@ export class Homepage extends Component {
         .catch(res => console.log(res));
     }
 
-    joinBattle= (id) => {
+    joinBattle= (id, handicap) => {
     this.setState({chosenID: id});
+    this.setState({handicap})
      this.setState({redirect: true});
     }
 
@@ -41,7 +43,8 @@ export class Homepage extends Component {
         <Redirect
             to={{
               pathname: "/JoinBattle",
-              state: {battleId: this.state.chosenID}
+              state: {battleId: this.state.chosenID,
+                        handicap: this.state.handicap}
             }}
           />)
         }
