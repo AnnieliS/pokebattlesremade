@@ -1,7 +1,16 @@
 import React, { Component } from 'react'
 
 export class Attacks extends Component {
-    render() {
+    
+    renderSpinner() {
+        return (
+            <div className="d-flex justify-content-center">
+                <div className="pokemonSpinner"></div>
+            </div>
+        )
+    }
+   
+    renderAttacks() {
         const attacks = this.props.attacks.filter(attack => (attack.type.name === this.props.battle.player1[this.props.activeHero].type2 || attack.type.name === this.props.battle.player1[this.props.activeHero].type1) && attack.pp > 3 && attack.power > 0)
         attacks.sort(function (a, b) {
             return a.power - b.power;
@@ -35,6 +44,12 @@ export class Attacks extends Component {
             </div>
         )
     }
+
+    render() {
+
+            return this.props.waiting ? this.renderSpinner() : this.renderAttacks();
+    }
+    
 }
 
 const attackStyle={

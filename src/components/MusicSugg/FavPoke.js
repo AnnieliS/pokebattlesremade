@@ -22,7 +22,7 @@ export class FavPoke extends Component {
       else if(h === "bug" || h === "dark" || h === "electric" ||  h === "dragon" || h === "fairy " || h === "fighting" || h === "fire" || h === "flying" || h === "ghost" || h === "grass" || h === "ground" || h === "ice" || h === "normal" || h === "poison" || h === "psychic" || h === "rock" || h === "steel" || h === "water")
         pokeFilter = this.props.pokemons.filter(poke => (poke.type1 === h || poke.type2 === h))
         else if(h === "small")
-        pokeFilter = this.props.pokemons.filter(poke => (poke.height_m < 1))
+        pokeFilter = this.props.pokemons.filter(poke => (poke.height_m < 0.4))
         else if(h === "big")
         pokeFilter = this.props.pokemons.filter(poke => (poke.height_m > 2))
         else if(h === "heavy")

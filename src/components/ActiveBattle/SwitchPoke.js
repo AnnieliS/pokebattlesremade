@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
+import Poke from './Poke'
 
 export class SwitchPoke extends Component {
+    
+
     render() {
+        if(this.props.hero)
         return (
             <div className="row d-flex justify-content-around">
-            {this.props.battle.player1.map((poke,i) =>
-            <div key={i} className = "col justify-content-around" onClick={this.props.switch.bind(this, i)}>
-                <img src={poke.img.front} alt={poke.name} style={{textAlign: "center"}}></img>
-            </div>
+            {this.props.hero.map((poke,i) =>
+            <Poke poke={poke} i={i} switch={this.props.switch}></Poke>
             )
     }
          </div>

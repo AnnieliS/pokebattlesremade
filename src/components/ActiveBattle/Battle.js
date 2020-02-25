@@ -4,17 +4,7 @@ export class Battle extends Component {
 
 
     render() {
-        let hero;
-        if (this.props.hero === "player1")
-             hero = this.props.battle.player1;
-        else
-            hero = this.props.battle.player2;
 
-        let enemy
-        if (this.props.enemy === "player1")
-            enemy = this.props.battle.player1;
-        else
-            enemy = this.props.battle.player2;
 
 
         return (
@@ -36,12 +26,12 @@ export class Battle extends Component {
                     <div className="d-flex">
                         <div className="canvas container d-flex flex-wrap justify-content-between">
                             <div className="row-12" style={{ width: "100%" }}>
-                                <img src={enemy[this.props.activeEnemy].img.front} alt={enemy[this.props.activeEnemy].name} style={player2PokemonStyle}></img>
-                                <div style={hpStyle}>{enemy[this.props.activeEnemy].hp.current}/{enemy[this.props.activeEnemy].hp.total}</div>
+                                <img src={this.props.enemy[this.props.activeEnemy].img.front} alt={this.props.enemy[this.props.activeEnemy].name} style={player2PokemonStyle}></img>
+                                <div style={hpStyle}>{this.props.enemy[this.props.activeEnemy].hp.current}/{this.props.enemy[this.props.activeEnemy].hp.total}</div>
                             </div>
                             <div className="row-12" style={{ width: "100%" }}>
-                                <img src={hero[this.props.activeHero].img.back} alt={hero[this.props.activeHero].name} style={player1PokemonStyle}></img>
-                                <div style={hpStyle}>{hero[this.props.activeHero].hp.current}/{hero[this.props.activeHero].hp.total}</div>
+                                <img src={this.props.hero[this.props.activeHero].img.back} alt={this.props.hero[this.props.activeHero].name} style={player1PokemonStyle}></img>
+                                <div style={hpStyle}>{this.props.hero[this.props.activeHero].hp.current}/{this.props.hero[this.props.activeHero].hp.total}</div>
 
                             </div>
                         </div>

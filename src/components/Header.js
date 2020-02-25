@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavLink, Link, Redirect } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import Axios from 'axios'
 // import Axios from 'axios'
 
@@ -19,8 +19,9 @@ export class Header extends Component {
     }
 
     clickLogin = () => {
-        Axios.get("https://pokebattles12.herokuapp.com/login/")
-        .then(<Redirect></Redirect>)
+        Axios.get("https://pokebattles12.herokuapp.com/login/googlelogin")
+        .then(res => console.log(res.data))
+        .catch(e => console.log(e))
     }
     
 
@@ -91,7 +92,9 @@ export class Header extends Component {
                 <div className="row d-flex justify-content-center mt-5" style={liStyle}>
 
                 <button
-                onclick={this.clickLogin}>
+                onClick={this.clickLogin}
+                style={googleStyle}>
+                    <img src='https://i.imgur.com/ihFLS1k.png' alt="google sign in" style={googleStyle}></img>
                 </button>
                 </div>
             </div>
@@ -135,6 +138,11 @@ const logoStyle = {
     backgroundPosition: "center",
 }
 
+const googleStyle = {
+    maxHeight: '50px',
+    width: 'auto',
+    borderRadius: "10px",
+}
 
 
 export default Header
