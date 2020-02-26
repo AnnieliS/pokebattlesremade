@@ -5,11 +5,11 @@ export class SwitchPoke extends Component {
     
 
     render() {
-        if(this.props.hero)
+        //if(this.props.hero)
         return (
             <div className="row d-flex justify-content-around">
             {this.props.hero.map((poke,i) =>
-            <Poke poke={poke} i={i} switch={this.props.switch}></Poke>
+            <Poke poke={poke} key={i} i={i} switch={this.props.switch}></Poke>
             )
     }
          </div>

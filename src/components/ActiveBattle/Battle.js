@@ -5,7 +5,7 @@ export class Battle extends Component {
 
     render() {
 
-
+      //  console.log(this.props.hero[this.props.activeHero]);
 
         return (
             <div className="gameboy ml-4 mt-4" id="GameBoy">

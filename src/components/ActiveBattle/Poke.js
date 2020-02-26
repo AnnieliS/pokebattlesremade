@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export class Poke extends Component {
     render() {
-        if (this.props.poke.hp.current === "0")
+        if (this.props.poke.hp.current === 0)
             return (
                 <div key={this.props.i} className="col justify-content-around justify-item-center">
                     <img src={this.props.poke.img.front} alt={this.props.poke.name} style={deadStyle}></img>

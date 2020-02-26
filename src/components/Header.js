@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import Axios from 'axios'
-import {GoogleLogin} from 'react-google-login'
+//import Axios from 'axios'
+//import {GoogleLogin} from 'react-google-login'
 
 
 export class Header extends Component {
@@ -66,6 +66,10 @@ export class Header extends Component {
                     <NavLink exact to="/CreateBattle" style={liStyle} activeStyle={this.active}>Create Battle</NavLink>
                 </div>
 
+                <div className="row justify-content-center" >
+                    <NavLink exact to="/AllBattles" style={liStyle} activeStyle={this.active}>My Battles</NavLink>
+                </div>
+
                 <div className="row justify-content-center" style={liStyle}>
                     <NavLink exact to="/TestBattle" style={liStyle} activeStyle={this.active}>Test Battle</NavLink>
                 </div>
@@ -77,6 +81,8 @@ export class Header extends Component {
                 <div className="row justify-content-center" >
                     <NavLink exact to="/AllPokemons" style={liStyle} activeStyle={this.active}>All Pokemons</NavLink>
                 </div>
+
+                
 
 
                 <div className="row justify-content-center" style={liStyle}>
@@ -114,15 +120,15 @@ export class Header extends Component {
     }
 }
 
-const responseGoogle = (response) => {
-    console.log(response);
-    Axios.post('https://pokebattles12.herokuapp.com/login/callback',{token : response},{headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-      }})
-        .then((res)=>{console.log(res)})
-        .catch((err)=>console.log(err));
-  }
+// const responseGoogle = (response) => {
+//     console.log(response);
+//     Axios.post('https://pokebattles12.herokuapp.com/login/callback',{token : response},{headers: {
+//         'Access-Control-Allow-Origin': '*',
+//         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+//       }})
+//         .then((res)=>{console.log(res)})
+//         .catch((err)=>console.log(err));
+//   }
 
 const liStyle = {
     color: "#B8B8B8",

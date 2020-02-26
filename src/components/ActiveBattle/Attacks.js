@@ -11,7 +11,16 @@ export class Attacks extends Component {
     }
    
     renderAttacks() {
-        const attacks = this.props.attacks.filter(attack => (attack.type.name === this.props.battle.player1[this.props.activeHero].type2 || attack.type.name === this.props.battle.player1[this.props.activeHero].type1) && attack.pp > 3 && attack.power > 0)
+        if (this.props.hero[this.props.activeHero].hp.current === 0)
+        return (
+            <div style={deadTextStyle}>
+                This Pokémon died.
+                Please choose a different Pokémon.
+            </div>
+        )
+
+        else {
+        const attacks = this.props.attacks.filter(attack => (attack.type.name === this.props.hero[this.props.activeHero].type2 || attack.type.name === this.props.hero[this.props.activeHero].type1) && attack.pp > 3 && attack.power > 0)
         attacks.sort(function (a, b) {
             return a.power - b.power;
           });
@@ -43,6 +52,7 @@ export class Attacks extends Component {
                 </style>
             </div>
         )
+                }
     }
 
     render() {
@@ -79,5 +89,11 @@ const attackType = {
     textAlign: "center"
 }
 
+const deadTextStyle = {
+    fontFamily: "Montserrat",
+    fontSize: "12px",
+    color: "#0e0e0e",
+    letterSpacing: "0.5px",
+}
 
 export default Attacks

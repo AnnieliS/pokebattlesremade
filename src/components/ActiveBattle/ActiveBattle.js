@@ -13,8 +13,9 @@ export class ActiveBattle extends Component {
     state = {
         waiting: true,
         battle: [],
-        activeHero: 2,
-        activeEnemy: 2,
+        battleId: 0,
+        activeHero: 0,
+        activeEnemy: 0,
         switchOptions: [],
         attacks: [],
         exampleAttack: {},
@@ -30,10 +31,18 @@ export class ActiveBattle extends Component {
 
 
     componentDidMount() {
-        const battID = "5e5395b1e254620017eba050";
-        Axios.get(`https://pokebattles12.herokuapp.com/battle/${battID}`)
+        //const battID = "5e5395b1e254620017eba050";
+        this.setState({battleId : this.props.location.state.battleId});
+        console.log(this.state.battleId);
+       
+        Axios.get(`https://pokebattles12.herokuapp.com/battle/${this.props.location.state.battleId}`)
             .then(res => {
                 this.setState({ battle: res.data });
+                if(this.props.location.state.player === "player1"){
+                    this.setState({hero : "player1" , enemy : "player 2"})
+                    } else {
+                        this.setState({hero : "player2" , enemy : "player1"})
+                    }
                 for (let i = 1; i < 727; i++) {
                     const url = `https://pokeapi.co/api/v2/move/${i}`
                     Axios.get(url)
@@ -77,6 +86,7 @@ export class ActiveBattle extends Component {
     }
 
     switchPokemon = (activePoke) => {
+        console.log(activePoke);
         this.setState({ activeHero: activePoke });
     }
 
@@ -147,6 +157,9 @@ export class ActiveBattle extends Component {
     }
 
     renderUI() {
+       // console.log(this.state.hero);
+
+
         let hero;
         if (this.state.hero === "player1")
             hero = this.state.battle.player1;
@@ -168,7 +181,7 @@ export class ActiveBattle extends Component {
                 </div>
                 <div className="col">
                     <div className="row" style={titleStyle} >Attack</div>
-                    <Attacks waiting={this.state.waiting} attacks={this.state.attacks} battle={this.state.battle} click={this.clickAttack} activeHero={this.state.activeHero}></Attacks>
+                    <Attacks waiting={this.state.waiting} attacks={this.state.attacks} hero={hero} click={this.clickAttack} activeHero={this.state.activeHero}></Attacks>
                     <div className="row" style={titleStyle}>Switch Pokemon</div>
                     <SwitchPoke hero={hero} switch={this.switchPokemon}></SwitchPoke>
                 </div>
@@ -234,7 +247,7 @@ export class ActiveBattle extends Component {
                     >
                          <div className="container d-flex justify-content-center flex-wrap m-auto">
                             <div className="row w-100">
-                                <img src="https://cms.kotaku.co.uk/wp-content/uploads/2019/06/l4idvmh43lukhcip4rdh.jpg" alt="win"></img>
+                                <img src="https://cms.kotaku.co.uk/wp-content/uploads/2019/06/l4idvmh43lukhcip4rdh.jpg" alt="lose"></img>
                             </div>
                             <div className="row w-100 justify-content-center">
                                 <button onClick={this.handleCloseModal}>Close Window</button>
