@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import Axios from 'axios'
-// import Axios from 'axios'
+import {GoogleLogin} from 'react-google-login'
 
 
 export class Header extends Component {
@@ -19,11 +19,13 @@ export class Header extends Component {
     }
 
     clickLogin = () => {
-        Axios.get("https://pokebattles12.herokuapp.com/login/googlelogin")
-        .then(res => console.log(res.data))
-        .catch(e => console.log(e))
+        window.location = 'https://pokebattles12.herokuapp.com/login/googlelogin'
+
+        // Axios.get("https://pokebattles12.herokuapp.com/login/googlelogin")
+        // .then(res => console.log(res.data))
+        // .catch(e => console.log(e))
     }
-    
+
 
     render() {
         return (
@@ -91,17 +93,36 @@ export class Header extends Component {
 
                 <div className="row d-flex justify-content-center mt-5" style={liStyle}>
 
-                <button
+                    <button
                 onClick={this.clickLogin}
                 style={googleStyle}>
                     <img src='https://i.imgur.com/ihFLS1k.png' alt="google sign in" style={googleStyle}></img>
                 </button>
+
+                    {/* <GoogleLogin
+                        clientId="29392838695-pk7dhdbvdogvp8eatmf478mm9g3evun7.apps.googleusercontent.com"
+                        buttonText="Login"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+                    /> */}
+
+
                 </div>
             </div>
         )
     }
 }
 
+const responseGoogle = (response) => {
+    console.log(response);
+    Axios.post('https://pokebattles12.herokuapp.com/login/callback',{token : response},{headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+      }})
+        .then((res)=>{console.log(res)})
+        .catch((err)=>console.log(err));
+  }
 
 const liStyle = {
     color: "#B8B8B8",
@@ -132,7 +153,7 @@ const avatarStyle = {
 const logoStyle = {
     height: "43px",
     width: "153px",
-    backgroundImage: "url(http://pixelartmaker.com/art/4debfda444f7e54.png)",
+    backgroundImage: "url(http://pixelartmaker.com/art/d98dde45d242734.png)",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
