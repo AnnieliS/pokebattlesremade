@@ -8,11 +8,13 @@ export class AllBattles extends Component {
         battles : [
             {
             bId: "5e5395b1e254620017eba050",
-            player: "player1"
+            player: "player1",
+            isActive: false
         },
         {
             bId: "5e52515542098900174449e6",
-            player: "player2"
+            player: "player2",
+            isActive: true
         }
         ],
         allBattles:  [],
@@ -35,10 +37,10 @@ export class AllBattles extends Component {
        
     }
 
-    enterBattle= (id, player) => {
+    enterBattle= (id, player, isActive) => {
     console.log(id);
     this.setState({chosenID: id});
-    this.setState({player})
+    this.setState({player, isActive})
      this.setState({redirect: true});
     }
 
@@ -55,7 +57,8 @@ export class AllBattles extends Component {
             to={{
               pathname: "/ActiveBattle",
               state: {battleId: this.state.chosenID,
-                        player: this.state.player}
+                        player: this.state.player,
+                    isActive: this.state.isActive}
             }}
           />)
         }
@@ -72,7 +75,7 @@ export class AllBattles extends Component {
                 <div className="row">
                     <div className=" d-flex float-left" style={backBlock}></div>
                     <div className = "row">
-                    <ListBattle allBattles={this.state.allBattles} joinBattle={this.enterBattle} player={this.state.player}></ListBattle>
+                    <ListBattle allBattles={this.state.allBattles} joinBattle={this.enterBattle} player={this.state.player} isActive={this.state.isActive}></ListBattle>
                     </div>
                 </div>
 

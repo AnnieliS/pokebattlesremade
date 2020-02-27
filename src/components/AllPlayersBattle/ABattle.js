@@ -5,7 +5,7 @@ export class ABattle extends Component {
 
 
     render() {
-           const button = <div style={joinStyle} onClick={this.props.joinBattle.bind(this, this.props.battle._id, this.props.player)}>Enter</div>
+           const button = <div style={joinStyle} onClick={this.props.joinBattle.bind(this, this.props.battle._id, this.props.player, this.props.isActive)}>Enter</div>
 
         return (
             <div style={battleStyle} className="container m-5 d-flex justify-content-center flex-wrap centerWhenSmall">

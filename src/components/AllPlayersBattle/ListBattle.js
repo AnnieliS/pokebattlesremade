@@ -14,7 +14,7 @@ export class ListBattle extends Component {
             return (
                 <div className="container d-flex justify-content-around flex-wrap centerWhenSmall">
                     {this.props.allBattles.map((battle)=> (
-                        <ABattle key={battle._id} battle={battle} joinBattle={this.props.joinBattle} player={this.props.player}></ABattle>
+                        <ABattle key={battle._id} battle={battle} joinBattle={this.props.joinBattle} player={this.props.player} isActive={this.props.isActive}></ABattle>
                     ))
         }
                 </div>

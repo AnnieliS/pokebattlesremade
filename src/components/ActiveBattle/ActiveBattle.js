@@ -32,17 +32,17 @@ export class ActiveBattle extends Component {
 
     componentDidMount() {
         //const battID = "5e5395b1e254620017eba050";
-        this.setState({battleId : this.props.location.state.battleId});
+        this.setState({ battleId: this.props.location.state.battleId , isActive: this.props.location.isActive});
         console.log(this.state.battleId);
-       
+
         Axios.get(`https://pokebattles12.herokuapp.com/battle/${this.props.location.state.battleId}`)
             .then(res => {
                 this.setState({ battle: res.data });
-                if(this.props.location.state.player === "player1"){
-                    this.setState({hero : "player1" , enemy : "player 2"})
-                    } else {
-                        this.setState({hero : "player2" , enemy : "player1"})
-                    }
+                if (this.props.location.state.player === "player1") {
+                    this.setState({ hero: "player1", enemy: "player 2", activeHero: res.data.active1, activeEnemy: res.data.active2})
+                } else {
+                    this.setState({ hero: "player2", enemy: "player1" , activeHero: res.data.active2, activeEnemy: res.data.active1})
+                }
                 for (let i = 1; i < 727; i++) {
                     const url = `https://pokeapi.co/api/v2/move/${i}`
                     Axios.get(url)
@@ -94,17 +94,16 @@ export class ActiveBattle extends Component {
         // const battID = "5e5395b1e254620017eba050";
 
         let battle = this.state.battle;
-        let hero;
-        if (this.state.hero === "player1")
+        let hero, enemy;
+        if (this.state.hero === "player1") {
             hero = battle.player1;
-        else
-            hero = battle.player2;
-
-        let enemy
-        if (this.state.enemy === "player1")
-            enemy = battle.player1;
-        else
             enemy = battle.player2;
+        }
+        else {
+            hero = battle.player2;
+            enemy = battle.player1;
+        }
+
 
         const damageMulti = enemy[this.state.activeEnemy].weakness[this.state.exampleType];
         let damage = this.state.exampleAttack.power * damageMulti;
@@ -122,9 +121,15 @@ export class ActiveBattle extends Component {
             if (newHp < 0)
                 newHp = 0;
             enemy[this.state.activeEnemy].hp.current = newHp;
+
+            if(this.state.hero === "player1")
+            battle.active1 = this.state.activeHero;
+            else
+            battle.active2 = this.state.activeHero;
+
             this.setState({ battle });
-            // Axios.put(`https://pokebattles12.herokuapp.com/battle/hp/${battID}`, this.state.battle);
-            // .then(socket.emit('', {}))
+            Axios.put(`https://pokebattles12.herokuapp.com/battle/hp/${this.state.battleId}`, this.state.battle)
+            .then(alert("Attacked Successfully"))
         }
 
 
@@ -134,17 +139,16 @@ export class ActiveBattle extends Component {
 
 
     renderWaitForPlayer() {
-        let hero;
-        if (this.state.hero === "player1")
+        let hero, enemy;
+        if (this.state.hero === "player1") {
             hero = this.state.battle.player1;
-        else
-            hero = this.state.battle.player2;
-
-        let enemy
-        if (this.state.enemy === "player1")
-            enemy = this.state.battle.player1;
-        else
             enemy = this.state.battle.player2;
+        }
+        else {
+            hero = this.state.battle.player2;
+            enemy = this.state.battle.player1;
+        }
+
         return (
             <div className="ml-1 flex-wrap">
                 <div className="d-flex justify-content-center align-content-end">
@@ -157,20 +161,18 @@ export class ActiveBattle extends Component {
     }
 
     renderUI() {
-       // console.log(this.state.hero);
+        // console.log(this.state.hero);
 
 
-        let hero;
-        if (this.state.hero === "player1")
+        let hero, enemy;
+        if (this.state.hero === "player1") {
             hero = this.state.battle.player1;
-        else
-            hero = this.state.battle.player2;
-
-        let enemy
-        if (this.state.enemy === "player1")
-            enemy = this.state.battle.player1;
-        else
             enemy = this.state.battle.player2;
+        }
+        else {
+            hero = this.state.battle.player2;
+            enemy = this.state.battle.player1;
+        }
 
 
         return (
@@ -191,18 +193,14 @@ export class ActiveBattle extends Component {
 
 
     render() {
-        let hero;
-        if (this.state.hero === "player1")
+        let hero, enemy;
+        if (this.state.hero === "player1"){
             hero = this.state.battle.player1;
-        else
-            hero = this.state.battle.player2;
-
-        let enemy
-        if (this.state.enemy === "player1")
-            enemy = this.state.battle.player1;
-        else
             enemy = this.state.battle.player2;
-
+        } else {
+            hero = this.state.battle.player2;
+            enemy = this.state.battle.player1;
+        }
 
         if (this.state.waiting)
             return this.renderSpinner()
@@ -231,7 +229,7 @@ export class ActiveBattle extends Component {
             );
         }
 
-        
+
 
         else if (hero[0].hp.current === 0 && hero[1].hp.current === 0 && hero[2].hp.current === 0) {
             return (
@@ -245,7 +243,7 @@ export class ActiveBattle extends Component {
                         isOpen={this.state.showModal}
                         contentLabel="Lose Modal"
                     >
-                         <div className="container d-flex justify-content-center flex-wrap m-auto">
+                        <div className="container d-flex justify-content-center flex-wrap m-auto">
                             <div className="row w-100">
                                 <img src="https://cms.kotaku.co.uk/wp-content/uploads/2019/06/l4idvmh43lukhcip4rdh.jpg" alt="lose"></img>
                             </div>
