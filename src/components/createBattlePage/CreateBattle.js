@@ -59,8 +59,9 @@ export class CreateBattle extends Component {
     onSubmit = (pokemons) => {
         Axios.post('https://pokebattles12.herokuapp.com/battle/', { player1: pokemons, handicap: this.state.handi })
             .then( res => {
-                let allBattles = user.battles.push({bId: res.data, player: "player1"});
-                Axios.put(`https://pokebattles12.herokuapp.com/user/${user.id}`, { battles: allBattles })
+                user.battles.push({bId: res.data, player: "player1", isActive: false});
+                console.log(user.battles);
+                Axios.put(`https://pokebattles12.herokuapp.com/user/${user.id}`, { battles: user.battles })
                 .then(this.setState({ backToHome: true }))
                 .catch(res => console.log(res))
                 

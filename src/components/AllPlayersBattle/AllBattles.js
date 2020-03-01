@@ -37,7 +37,7 @@ export class AllBattles extends Component {
             JSON.parse(obj)
                 .battles.map(battle =>
                     Axios.get(`https://pokebattles12.herokuapp.com/battle/${battle.bId}`)
-                        .then(res => { this.setState({ allBattles: [...this.state.allBattles, res.data] }); this.setState({ loading: false }) })
+                        .then(res => { console.log(res); console.log(this.state.allBattles, res); this.setState({ allBattles: [...this.state.allBattles, res.data], loading: false }); })
                         .catch(res => console.log(res))
                 )
         }
@@ -51,9 +51,7 @@ export class AllBattles extends Component {
 
     enterBattle = (id, player, isActive) => {
         console.log(id);
-        this.setState({ chosenID: id });
-        this.setState({ player, isActive })
-        this.setState({ redirect: true });
+        this.setState({ chosenID: id , player, isActive, redirect: true});
     }
 
     createBattle = () => {

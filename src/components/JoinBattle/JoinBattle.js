@@ -48,11 +48,11 @@ export class JoinBattle extends Component {
         if (obj && obj !== undefined && obj !== 'undefined') {
             user = JSON.parse(obj) }
         Axios.put(`https://pokebattles12.herokuapp.com/battle/${this.state.id}`, { player2: pokemons })
-            .then(res => {
-                let allBattles = user.battles.push({ bId: res.data, player: "player2" });
-                Axios.put(`https://pokebattles12.herokuapp.com/user/${user.id}`, { battles: allBattles })
+            .then(() => {
+                user.battles.push({ bId: this.state.id, player: "player2", isActive: true});
+                Axios.put(`https://pokebattles12.herokuapp.com/user/${user.id}`, { battles: user.battles })
                     .then(() =>
-                         { this.setState({ backToHome: true }); this.setState({ finish: true }) })
+                         { this.setState({ backToHome: true, finish: true }) })
                     .catch(res => console.log(res))
             })
         .catch (err => console.log(err))
