@@ -3,7 +3,13 @@ import ListBattle from './ListBattle'
 import NewBattle from './NewBattle'
 import Axios from 'axios'
 import { Redirect } from 'react-router-dom'
+import jwtDecode from 'jwt-decode';
+import { NotificationManager } from 'react-notifications';
 
+function getCookieValue(a) {
+    var b = document.cookie.match('(^|[^;]+)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+}
 
 
 export class Homepage extends Component {
@@ -23,16 +29,25 @@ export class Homepage extends Component {
         Axios.get("https://pokebattles12.herokuapp.com/battle")
         .then(res => {this.setState({allBattles : res.data.sort((a, b) => a.player2[0].name.length - b.player2[0].name.length)}); this.setState({loading: true})})
         .catch(res => console.log(res));
+        let obj = getCookieValue('jwt');
+        if( obj && obj !== undefined && obj !== 'undefined' ){
+            sessionStorage.setItem('user',JSON.stringify(jwtDecode(obj).data));
+        }
     }
 
     joinBattle= (id, handicap) => {
-    this.setState({chosenID: id});
-    this.setState({handicap})
-     this.setState({redirect: true});
+        if( sessionStorage.getItem('user') !== undefined ){
+            this.setState({chosenID: id});
+            this.setState({handicap})
+             this.setState({redirect: true});
+        }
+        else {
+            NotificationManager.info('System Message', 'Login to battle', 5000);
+        }
+   
     }
 
     createBattle = () => {
-        alert("create");
     }
     
     

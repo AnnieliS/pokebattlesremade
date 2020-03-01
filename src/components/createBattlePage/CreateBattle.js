@@ -5,10 +5,15 @@ import { Handicap } from './Handicap'
 import { FaChevronCircleLeft } from 'react-icons/fa'
 import Axios from 'axios';
 import { NavLink, Redirect } from 'react-router-dom'
+import jwtDecode from 'jwt-decode';
+import { NotificationManager } from 'react-notifications';
 
+function getCookieValue(a) {
+    var b = document.cookie.match('(^|[^;]+)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+}
 
-
-
+let user;
 
 export class CreateBattle extends Component {
     state = {
@@ -20,14 +25,23 @@ export class CreateBattle extends Component {
         handi: "All"
     }
 
+    
+
     componentWillMount() {
         this.setState({ loading: true });
     }
 
     componentDidMount() {
-        Axios.get('https://pokebattles12.herokuapp.com/pokemon/')
+        let obj = getCookieValue('jwt');
+        if (obj && obj !== undefined && obj !== 'undefined') {
+            user = jwtDecode(obj).data;
+            Axios.get('https://pokebattles12.herokuapp.com/pokemon/')
             .then(res => { this.setState({ pokemons: res.data }); this.setState({ loading: false }); })
             .catch(res => console.log(res));
+        }else{
+            NotificationManager.error('Error message', `Please login to battle`, 5000);
+            this.props.history.push('/');
+        }
     }
 
     Choose = (id) => {
@@ -43,22 +57,26 @@ export class CreateBattle extends Component {
 
 
     onSubmit = (pokemons) => {
-        console.log("enter");
-        Axios.post('https://pokebattles12.herokuapp.com/battle/', {player1: pokemons , handicap: this.state.handi})
-        .then(this.setState({backToHome: true}))
+        Axios.post('https://pokebattles12.herokuapp.com/battle/', { player1: pokemons, handicap: this.state.handi })
+            .then( res => {
+                let allBattles = user.battles.push({bId: res.data, player: "player1"});
+                Axios.put(`https://pokebattles12.herokuapp.com/user/${user.id}`, { battles: allBattles })
+                .then(this.setState({ backToHome: true }))
+                .catch(res => console.log(res))
+                
+            })
+            .catch(err => console.log(err));
     }
 
     setHandi = (handi) => {
-        console.log(handi)
-        this.setState({handi});
+        this.setState({ handi });
     }
 
 
 
     render() {
-        console.log(this.state.handi);
-    if(this.state.backToHome)
-    return(<Redirect exact to='/'></Redirect>)
+        if (this.state.backToHome)
+            return (<Redirect exact to='/'></Redirect>)
         return (
             <div className="container ml-1">
                 <div className="row">
@@ -66,7 +84,7 @@ export class CreateBattle extends Component {
                 </div>
 
                 <div className="row d-flex justify-content-start ml-5 mt-3">
-                <NavLink exact to="/"><FaChevronCircleLeft style={arrowStyle} className="my-auto m-3" onClick={this.backButton} /></NavLink> <h1 style={titleStyle}>Create New Battle</h1>
+                    <NavLink exact to="/"><FaChevronCircleLeft style={arrowStyle} className="my-auto m-3" onClick={this.backButton} /></NavLink> <h1 style={titleStyle}>Create New Battle</h1>
                 </div>
 
                 <div className="row d-flex justify-content-center">

@@ -5,13 +5,19 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import ReactRouter from './router/Router.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+
 
 
 
 ReactDOM.render(
+    <div>
     <Router>
         <ReactRouter />
-    </Router>,
+    </Router>
+    <NotificationContainer />
+    </div>,
     document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

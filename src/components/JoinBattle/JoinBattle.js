@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ChosenList } from './ChosenList'
 import { AllPokemon } from './AllPokemon'
 import { Handicap } from './Handicap'
-import { FaChevronCircleLeft} from 'react-icons/fa'
+import { FaChevronCircleLeft } from 'react-icons/fa'
 import Axios from 'axios';
 import { NavLink, Redirect } from 'react-router-dom'
 
@@ -24,16 +24,16 @@ export class JoinBattle extends Component {
         Axios.get('https://pokebattles12.herokuapp.com/pokemon/')
             .then(res => { this.setState({ pokemons: res.data }); this.setState({ loading: false }); })
             .catch(res => console.log(res));
-        this.setState({id: this.props.location.state.battleId, handi: this.props.location.state.handicap}
-            )
+        this.setState({ id: this.props.location.state.battleId, handi: this.props.location.state.handicap }
+        )
     }
 
     Choose = (id) => {
         let chosen = this.state.chosen;
-        if (chosen.length < 3){
+        if (chosen.length < 3) {
             chosen.push(this.state.pokemons.filter(poke => poke._id === id));
-            chosen.filter((poke, i) => {return chosen.indexOf(poke) === i})
-            }
+            chosen.filter((poke, i) => { return chosen.indexOf(poke) === i })
+        }
         this.setState({ chosen })
     }
 
@@ -43,16 +43,26 @@ export class JoinBattle extends Component {
 
 
     onSubmit = (pokemons) => {
-        Axios.put(`https://pokebattles12.herokuapp.com/battle/${this.state.id}`, {player2: pokemons})
-        .then(() => {this.setState({finish: true})})
-        .catch(err => console.log(err))
+        let obj = sessionStorage.getItem('user');
+        let user;
+        if (obj && obj !== undefined && obj !== 'undefined') {
+            user = JSON.parse(obj) }
+        Axios.put(`https://pokebattles12.herokuapp.com/battle/${this.state.id}`, { player2: pokemons })
+            .then(res => {
+                let allBattles = user.battles.push({ bId: res.data, player: "player2" });
+                Axios.put(`https://pokebattles12.herokuapp.com/user/${user.id}`, { battles: allBattles })
+                    .then(() =>
+                         { this.setState({ backToHome: true }); this.setState({ finish: true }) })
+                    .catch(res => console.log(res))
+            })
+        .catch (err => console.log(err))
     }
 
 
 
     render() {
-        if(this.state.finish)
-        return <Redirect exact to="/"></Redirect>
+        if (this.state.finish)
+            return <Redirect exact to="/"></Redirect>
         return (
             <div className="container ml-1">
                 <div className="row">
@@ -60,7 +70,7 @@ export class JoinBattle extends Component {
                 </div>
 
                 <div className="row d-flex justify-content-start ml-5 mt-3">
-                <NavLink exact to="/"><FaChevronCircleLeft style={arrowStyle} className="my-auto m-3" onClick={this.backButton} /></NavLink> <h1 style={titleStyle}>Join Battle</h1>
+                    <NavLink exact to="/"><FaChevronCircleLeft style={arrowStyle} className="my-auto m-3" onClick={this.backButton} /></NavLink> <h1 style={titleStyle}>Join Battle</h1>
                 </div>
 
                 <div className="row d-flex justify-content-center">

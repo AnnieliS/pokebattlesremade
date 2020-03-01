@@ -15,7 +15,7 @@ export class NewBattle extends Component {
                     <div style={idStyle}>Create New Battle</div>
                 </div>
                 <div className="row m-0">
-                 <NavLink exact to='/CreateBattle'><div style={joinStyle}>NEW</div></NavLink>
+                 <NavLink exact to='/CreateBattle/'><div style={joinStyle}>NEW</div></NavLink>
 
                 </div>
                 <div style={line} ></div>

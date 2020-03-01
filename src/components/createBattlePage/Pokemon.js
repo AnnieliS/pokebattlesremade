@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 export class Pokemon extends Component {
     render() {
-
         return (
             <div className="col-3 m-2 poke" style={pokemonStyle} onClick={this.props.choose.bind(this, this.props.poke._id)}>
                 <img

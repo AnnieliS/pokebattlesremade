@@ -3,7 +3,6 @@ import Pokemon from './Pokemon'
 
 export class ABattle extends Component {
 
-
     render() {
        const joinButton = Object.entries(this.props.battle.player2[0].name).length === 0;
        let button;

@@ -1,7 +1,20 @@
 import React, { Component } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-//import Axios from 'axios'
-//import {GoogleLogin} from 'react-google-login'
+import jwtDecode from 'jwt-decode';
+import {NotificationManager} from 'react-notifications'
+
+function getCookieValue(a) {
+    var b = document.cookie.match('(^|[^;]+)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+}
+
+function setCookie(name, value, days) {
+    var d = new Date;
+    d.setTime(d.getTime() + 24*60*60*1000*days);
+    document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+}
+
+function deleteCookie(name) { setCookie(name, '', -1); }
 
 
 export class Header extends Component {
@@ -18,16 +31,28 @@ export class Header extends Component {
         letterSpacing: "0.5px"
     }
 
+    componentDidMount(){
+       
+    }
+
     clickLogin = () => {
         window.location = 'https://pokebattles12.herokuapp.com/login/googlelogin'
+    }
 
-        // Axios.get("https://pokebattles12.herokuapp.com/login/googlelogin")
-        // .then(res => console.log(res.data))
-        // .catch(e => console.log(e))
+    clickLogout = () => {
+        deleteCookie('jwt');
+        NotificationManager.warning('restart to login again', 'Logged Out successfully', 5000);
     }
 
 
     render() {
+        let obj = getCookieValue('jwt');
+        let loginButt;
+        if( obj && obj !== undefined && obj !== 'undefined' ){
+            loginButt = <button onClick={this.clickLogout} style={googleStyle}> <img src='https://i.imgur.com/ExLSkVJ.png' alt='google sign in' style={googleStyle}></img> </button>
+        } else {
+            loginButt = <button onClick={this.clickLogin} style={googleStyle}> <img src='https://i.imgur.com/AJPOQxL.png' alt='google sign in' style={googleStyle}></img> </button>
+        }
         return (
             <div className="col-2 m-0 align-self-start h-100" style={{ backgroundColor: "#F8f8f8", position: "fixed" }}>
                 <div className="row justify-content-center pt-5">
@@ -99,20 +124,12 @@ export class Header extends Component {
 
                 <div className="row d-flex justify-content-center mt-5" style={liStyle}>
 
-                    <button
+                    {/* <button
                 onClick={this.clickLogin}
                 style={googleStyle}>
                     <img src='https://i.imgur.com/ihFLS1k.png' alt="google sign in" style={googleStyle}></img>
-                </button>
-
-                    {/* <GoogleLogin
-                        clientId="29392838695-pk7dhdbvdogvp8eatmf478mm9g3evun7.apps.googleusercontent.com"
-                        buttonText="Login"
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
-                        cookiePolicy={'single_host_origin'}
-                    /> */}
-
+                </button> */}
+                {loginButt}
 
                 </div>
             </div>
@@ -120,15 +137,6 @@ export class Header extends Component {
     }
 }
 
-// const responseGoogle = (response) => {
-//     console.log(response);
-//     Axios.post('https://pokebattles12.herokuapp.com/login/callback',{token : response},{headers: {
-//         'Access-Control-Allow-Origin': '*',
-//         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-//       }})
-//         .then((res)=>{console.log(res)})
-//         .catch((err)=>console.log(err));
-//   }
 
 const liStyle = {
     color: "#B8B8B8",
